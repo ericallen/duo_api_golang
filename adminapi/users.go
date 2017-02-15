@@ -20,7 +20,7 @@ type Groups struct {
 	Name string
 }
 
-type Phones struct {
+type Phone struct {
 	Phone_ID           string
 	Number             string
 	Extention          string
@@ -34,7 +34,7 @@ type Phones struct {
 	SMS_Passcodes_Sent bool
 }
 
-type Tokens struct {
+type Token struct {
 	Serial   string
 	Token_ID string
 	Type     string
@@ -49,8 +49,8 @@ type UserResponse struct {
 	Groups     []Groups
 	Last_Login int64
 	Notes      string
-	Phones     []Phones
-	Tokens     []Tokens
+	Phones     []Phone
+	Tokens     []Token
 }
 
 type UsersResult struct {
@@ -236,6 +236,151 @@ func (api *AdminApi) GetBypassCodesForUser(user_id string, options ...func(*url.
 		return nil, err
 	}
 	ret := &BypassCodesResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type UserGroupResponse struct {
+	Stat     string
+	Response []UserGroups
+}
+
+type UserGroups struct {
+	Desc     string
+	Group_ID string
+	Name     string
+}
+
+//Retreive Groups by User ID
+func (api *AdminApi) RetrieveGroupsByUserID(user_id string) (*UserGroupResponse, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/groups", user_id)
+	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &UserGroupResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+//Assoicate Group with User
+func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url.Values)) (*SimpleResponse, error) {
+	opts := url.Values{}
+	for _, o := range options {
+		o(&opts)
+	}
+
+	path := fmt.Sprintf("/admin/v1/users/%s/groups", user_id)
+	_, body, err := api.SignedCall("POST", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &SimpleResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+//Disassoicate Group from User
+func (api *AdminApi) DisassociateGroupfromUser(user_id, group_id string) (*SimpleResponse, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/groups/%s", user_id, group_id)
+	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &SimpleResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type PhoneResult struct {
+	Stat     string
+	Response []Phone
+}
+
+//Retreive Phones by User ID
+func (api *AdminApi) RetreivePhonesbyUserID(user_id string) (*PhoneResult, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/phones", user_id)
+	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &PhoneResult{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+//Disassociate Phone from User
+func (api *AdminApi) DisassoicatePhonefromUser(user_id, phone_id string) (*SimpleResponse, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/phones/%s", user_id, phone_id)
+	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &SimpleResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type TokenResult struct {
+	Stat     string
+	Response []Token
+}
+
+//Retreive Hardware Token by UserID
+func (api *AdminApi) RetreiveHardwareTokenbyUserID(user_id string) (*TokenResult, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/tokens", user_id)
+	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &TokenResult{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+//Associate Hardware Token with User
+func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*SimpleResponse, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/tokens", user_id)
+	_, body, err := api.SignedCall("POST", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &SimpleResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+//Disassociate Hardware Token from User
+func (api *AdminApi) DisassociateHardwareTokenfromUser(user_id, token_id string) (*SimpleResponse, error) {
+	opts := url.Values{}
+	path := fmt.Sprintf("/admin/v1/users/%s/tokens/%s", user_id, token_id)
+	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &SimpleResponse{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
