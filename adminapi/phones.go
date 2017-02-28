@@ -61,9 +61,7 @@ func SetExtension(extension string) func(*url.Values) {
 //Retrieve Phones
 //Optional parameters SetNumber and SetExtension
 func (api *AdminApi) RetrievePhones() (*PhoneUserResult, error) {
-	opts := url.Values{}
-
-	_, body, err := api.SignedCall("GET", "/admin/v1/phones", opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", "/admin/v1/phones", nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -126,9 +124,8 @@ func (api *AdminApi) CreatePhone(options ...func(*url.Values)) (*PhoneIDResult, 
 //Required parameters - phone_id
 //Optional parameters - None
 func (api *AdminApi) RetrievePhoneByID(phone_id string) (*PhoneIDResult, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/phones/%s", phone_id)
-	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -163,9 +160,8 @@ func (api *AdminApi) ModifyPhone(phone_id string, options ...func(*url.Values)) 
 //Required parameters - phone_id
 //Optional parameters - None
 func (api *AdminApi) DeletePhone(phone_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/phones/%s", phone_id)
-	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -293,9 +289,8 @@ func (api *AdminApi) SendInstallionalURLviaSMS(phone_id string, options ...func(
 //Required parameters - phone_id
 //Optional Parameters - None
 func (api *AdminApi) SendPasscodesviaSMS(phone_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/phones/%s/send_sms_passcodes", phone_id)
-	_, body, err := api.SignedCall("POST", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("POST", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}

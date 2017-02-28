@@ -104,8 +104,7 @@ func (api *AdminApi) CreateUser(username string, options ...func(*url.Values)) (
 // Users - Retrive User by ID
 func (api *AdminApi) RetrieveUserByID(userid string) (*UserResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s", userid)
-	opts := url.Values{}
-	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -167,9 +166,8 @@ type SimpleResponse struct {
 
 //DeleteUser -
 func (api *AdminApi) DeleteUser(user_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s", user_id)
-	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -255,9 +253,8 @@ type UserGroups struct {
 
 //Retreive Groups by User ID
 func (api *AdminApi) RetrieveGroupsByUserID(user_id string) (*UserGroupResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/groups", user_id)
-	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -289,9 +286,8 @@ func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url
 
 //Disassoicate Group from User
 func (api *AdminApi) DisassociateGroupfromUser(user_id, group_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/groups/%s", user_id, group_id)
-	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -309,9 +305,8 @@ type PhoneResult struct {
 
 //Retreive Phones by User ID
 func (api *AdminApi) RetreivePhonesbyUserID(user_id string) (*PhoneResult, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/phones", user_id)
-	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -324,9 +319,8 @@ func (api *AdminApi) RetreivePhonesbyUserID(user_id string) (*PhoneResult, error
 
 //Disassociate Phone from User
 func (api *AdminApi) DisassoicatePhonefromUser(user_id, phone_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/phones/%s", user_id, phone_id)
-	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -344,9 +338,8 @@ type TokenResult struct {
 
 //Retreive Hardware Token by UserID
 func (api *AdminApi) RetreiveHardwareTokenbyUserID(user_id string) (*TokenResult, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/tokens", user_id)
-	_, body, err := api.SignedCall("GET", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -359,9 +352,8 @@ func (api *AdminApi) RetreiveHardwareTokenbyUserID(user_id string) (*TokenResult
 
 //Associate Hardware Token with User
 func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/tokens", user_id)
-	_, body, err := api.SignedCall("POST", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("POST", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
@@ -374,9 +366,8 @@ func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*SimpleResp
 
 //Disassociate Hardware Token from User
 func (api *AdminApi) DisassociateHardwareTokenfromUser(user_id, token_id string) (*SimpleResponse, error) {
-	opts := url.Values{}
 	path := fmt.Sprintf("/admin/v1/users/%s/tokens/%s", user_id, token_id)
-	_, body, err := api.SignedCall("DELETE", path, opts, duoapi.UseTimeout)
+	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
