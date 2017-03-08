@@ -159,19 +159,14 @@ func (api *AdminApi) ModifyUser(user_id string, options ...func(*url.Values)) (*
 	return ret, nil
 }
 
-type SimpleResponse struct {
-	Stat     string
-	Response string
-}
-
 //DeleteUser -
-func (api *AdminApi) DeleteUser(user_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DeleteUser(user_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s", user_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -179,7 +174,7 @@ func (api *AdminApi) DeleteUser(user_id string) (*SimpleResponse, error) {
 }
 
 //Enroll User
-func (api *AdminApi) EnrollUser(username, email string, options ...func(*url.Values)) (*SimpleResponse, error) {
+func (api *AdminApi) EnrollUser(username, email string, options ...func(*url.Values)) (*StatResult, error) {
 	opts := url.Values{}
 	opts.Set("username", username)
 	opts.Set("email", email)
@@ -191,7 +186,7 @@ func (api *AdminApi) EnrollUser(username, email string, options ...func(*url.Val
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -266,7 +261,7 @@ func (api *AdminApi) RetrieveGroupsByUserID(user_id string) (*UserGroupResponse,
 }
 
 //Assoicate Group with User
-func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url.Values)) (*SimpleResponse, error) {
+func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url.Values)) (*StatResult, error) {
 	opts := url.Values{}
 	for _, o := range options {
 		o(&opts)
@@ -277,7 +272,7 @@ func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -285,13 +280,13 @@ func (api *AdminApi) AssociateGroupwithUser(user_id string, options ...func(*url
 }
 
 //Disassoicate Group from User
-func (api *AdminApi) DisassociateGroupfromUser(user_id, group_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DisassociateGroupfromUser(user_id, group_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s/groups/%s", user_id, group_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -318,13 +313,13 @@ func (api *AdminApi) RetreivePhonesbyUserID(user_id string) (*PhoneResult, error
 }
 
 //Disassociate Phone from User
-func (api *AdminApi) DisassoicatePhonefromUser(user_id, phone_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DisassoicatePhonefromUser(user_id, phone_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s/phones/%s", user_id, phone_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -351,13 +346,13 @@ func (api *AdminApi) RetreiveHardwareTokenbyUserID(user_id string) (*TokenResult
 }
 
 //Associate Hardware Token with User
-func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*SimpleResponse, error) {
+func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s/tokens", user_id)
 	_, body, err := api.SignedCall("POST", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -365,13 +360,13 @@ func (api *AdminApi) AssoicateHardwareTokenwithUser(user_id string) (*SimpleResp
 }
 
 //Disassociate Hardware Token from User
-func (api *AdminApi) DisassociateHardwareTokenfromUser(user_id, token_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DisassociateHardwareTokenfromUser(user_id, token_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/users/%s/tokens/%s", user_id, token_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}

@@ -127,7 +127,7 @@ func (api *AdminApi) RetrieveHardwareTokenbyID(token_id string) (*TokensResult, 
 //Resync Hardware Token
 //Required parameters - token_id, code1, code2, code3
 //Optional parameters - none
-func (api *AdminApi) ResyncHardwareToken(token_id, code1, code2, code3 string) (*SimpleResponse, error) {
+func (api *AdminApi) ResyncHardwareToken(token_id, code1, code2, code3 string) (*StatResult, error) {
 	opts := url.Values{}
 	opts.Set("code1", code1)
 	opts.Set("code2", code2)
@@ -137,7 +137,7 @@ func (api *AdminApi) ResyncHardwareToken(token_id, code1, code2, code3 string) (
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -147,13 +147,13 @@ func (api *AdminApi) ResyncHardwareToken(token_id, code1, code2, code3 string) (
 //Delete Hardware Token
 //Required parameters - token_id
 //Optional parameters - none
-func (api *AdminApi) DeleteHardwareToken(token_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DeleteHardwareToken(token_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/tokens/%s", token_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}

@@ -159,13 +159,13 @@ func (api *AdminApi) ModifyPhone(phone_id string, options ...func(*url.Values)) 
 //Delete Phone
 //Required parameters - phone_id
 //Optional parameters - None
-func (api *AdminApi) DeletePhone(phone_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DeletePhone(phone_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/phones/%s", phone_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -288,13 +288,13 @@ func (api *AdminApi) SendInstallionalURLviaSMS(phone_id string, options ...func(
 //Send Passcodes via SMS
 //Required parameters - phone_id
 //Optional Parameters - None
-func (api *AdminApi) SendPasscodesviaSMS(phone_id string) (*SimpleResponse, error) {
+func (api *AdminApi) SendPasscodesviaSMS(phone_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/phones/%s/send_sms_passcodes", phone_id)
 	_, body, err := api.SignedCall("POST", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}

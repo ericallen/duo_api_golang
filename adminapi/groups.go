@@ -145,13 +145,13 @@ func (api *AdminApi) UpdateGroup(group_id string, options ...func(*url.Values)) 
 //DeleteGroup
 //Required parameters - group_id
 //Optional parameters - none
-func (api *AdminApi) DeleteGroup(group_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DeleteGroup(group_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/groups/%s", group_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}

@@ -122,13 +122,13 @@ func (api *AdminApi) ModifyAdministrator(administrator_id string, options ...fun
 //Delete administrator
 //Required parameters: administrator_id
 //Optional parameters: none
-func (api *AdminApi) DeleteAdministrator(administrator_id string) (*SimpleResponse, error) {
+func (api *AdminApi) DeleteAdministrator(administrator_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/admins/%s", administrator_id)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
@@ -138,13 +138,13 @@ func (api *AdminApi) DeleteAdministrator(administrator_id string) (*SimpleRespon
 //Reset Administrator Authentication Attempts
 //Required parameters: administrator_id
 //Optional parameters: none
-func (api *AdminApi) ResetAdministratorAuthenticationAttemps(administrator_id string) (*SimpleResponse, error) {
+func (api *AdminApi) ResetAdministratorAuthenticationAttemps(administrator_id string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/admins/%s/reset", administrator_id)
 	_, body, err := api.SignedCall("POST", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}

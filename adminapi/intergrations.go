@@ -212,13 +212,13 @@ func (api *AdminApi) ModifyIntegration(integration_key string, options ...func(*
 //Delete Integration
 //Required parameters - integration_key
 //Optional parameters - none
-func (api *AdminApi) DeleteIntegration(integration_key string) (*SimpleResponse, error) {
+func (api *AdminApi) DeleteIntegration(integration_key string) (*StatResult, error) {
 	path := fmt.Sprintf("/admin/v1/integration/%s", integration_key)
 	_, body, err := api.SignedCall("DELETE", path, nil, duoapi.UseTimeout)
 	if err != nil {
 		return nil, err
 	}
-	ret := &SimpleResponse{}
+	ret := &StatResult{}
 	if err = json.Unmarshal(body, ret); err != nil {
 		return nil, err
 	}
