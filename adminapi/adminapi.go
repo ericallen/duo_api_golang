@@ -6,6 +6,13 @@ type AdminApi struct {
 	duoapi.DuoApi
 }
 
+type StatResult struct {
+	Stat           string
+	Code           *int32
+	Message        *string
+	Message_Detail *string
+}
+
 //Build a new Duo Admin API object.
 // api is a duoapi.DuoApi object used to make the Duo Rest API calls.
 // Example: adminapi.NewAdminApi(*duoapi.NewDuoApi(ikey,skey,host,userAgent,duoapi.SetTimeout(10*time.second)))

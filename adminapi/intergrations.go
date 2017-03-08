@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
+	"strings"
 
 	"github.com/ericallen/duo_api_golang"
 )
@@ -79,7 +80,7 @@ func IntegrationGreeting(greeting string) func(*url.Values) {
 
 func IntegrationGroupsAllowed(groups_allowed []string) func(*url.Values) {
 	return func(opts *url.Values) {
-		opts.Set("groups_allowed", groups_allowed)
+		opts.Set("groups_allowed", strings.Join(groups_allowed, ","))
 	}
 }
 
