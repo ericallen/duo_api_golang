@@ -9,34 +9,38 @@ import (
 )
 
 type AuthenticationLogsResult struct {
-	Stat     string
-	Response []AuthenticationLog
+	Stat     string              `json:"stat,omitempty"`
+	Response []AuthenticationLog `json:"response,omitempty"`
 }
 
 type AuthenticationLog struct {
-	Access_Device  AccessDevice
-	Device         string
-	Factor         string
-	Integration    string
-	IP             string
-	Location       Location
-	New_Enrollment bool
-	Reason         string
-	Result         string
-	Timestamp      int64
-	Username       string
+	Access_Device  AccessDevice `json:"access_device,omitempty"`
+	Device         string       `json:"device,omitempty"`
+	Factor         string       `json:"factor,omitempty"`
+	Integration    string       `json:"integration,omitempty"`
+	IP             string       `json:"ip,omitempty"`
+	Location       Location     `json:"location,omitempty"`
+	New_Enrollment bool         `json:"new_enrollment,omitempty"`
+	Reason         string       `json:"reason,omitempty"`
+	Result         string       `json:"result,omitempty"`
+	Timestamp      int64        `json:"timestamp,omitempty"`
+	Username       string       `json:"username,omitempty"`
 }
 
 type AccessDevice struct {
-	Browser         string
-	Browser_Version string
-	Flash_Version   string
+	Browser                 string `json:"browser,omitempty"`
+	Browser_Version         string `json:"browser_version,omitempty"`
+	Flash_Version           string `json:"flash_version,omitempty"`
+	Java_Version            string `json:"java_version,omitempty"`
+	OS                      string `json:"os,omitempty"`
+	OS_Version              string `json:"os_version,omitempty"`
+	Trusted_Endpoint_Status string `json:"trusted_endpoint_status,omitempty"`
 }
 
 type Location struct {
-	City    string
-	State   string
-	Country string
+	City    string `json:"city,omitempty"`
+	State   string `json:"state,omitempty"`
+	Country string `json:"country,omitempty"`
 }
 
 func LogsMinTime(mintime int64) func(*url.Values) {
@@ -65,16 +69,16 @@ func (api *AdminApi) AuthenticationLogs(options ...func(*url.Values)) (*Authenti
 }
 
 type AdministratorLogResult struct {
-	Stat     string
-	Response []AdminsitratorLog
+	Stat     string             `json:"stat,omitempty"`
+	Response []AdminsitratorLog `json:"response,omitempty"`
 }
 
 type AdminsitratorLog struct {
-	Action      string
-	Description string
-	Object      string
-	Timestamp   int64
-	Username    string
+	Action      string `json:"action,omitempty"`
+	Description string `json:"description,omitempty"`
+	Object      string `json:"object,omitempty"`
+	Timestamp   int64  `json:"timestamp,omitempty"`
+	Username    string `json:"username,omitempty"`
 }
 
 //Administrator Logs
@@ -97,16 +101,16 @@ func (api *AdminApi) AdministratorLogs(options ...func(*url.Values)) (*Administr
 }
 
 type TelephonyLogResult struct {
-	Stat     string
-	Response []TelephonyLog
+	Stat     string         `json:"stat,omitempty"`
+	Response []TelephonyLog `json:"response,omitempty"`
 }
 
 type TelephonyLog struct {
-	Timestamp int64
-	Context   string
-	Type      string
-	Phone     string
-	Credits   string
+	Timestamp int64  `json:"timestamp,omitempty"`
+	Context   string `json:"context,omitempty"`
+	Type      string `json:"type,omitempty"`
+	Phone     string `json:"phone,omitempty"`
+	Credits   int64  `json:"credits,omitempty"`
 }
 
 //Telephony Logs
