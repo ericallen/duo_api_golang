@@ -10,24 +10,24 @@ import (
 )
 
 type GroupResponse struct {
-	Desc               string
-	Push_Enabled       bool
-	SMS_Enabled        bool
-	Voice_Enabled      bool
-	Mobile_OTP_Enabled bool
-	Group_ID           string
-	Name               string
-	Status             string
+	Desc               string `json:"desc,omitemtpy"`
+	Push_Enabled       bool   `json:"push_enabled,omitempty"`
+	SMS_Enabled        bool   `json:"sms_enabled,omitempty"`
+	Voice_Enabled      bool   `json:"voice_enabled,omitempty"`
+	Mobile_OTP_Enabled bool   `json:"mobile_otp_enabled,omitempty"`
+	Group_ID           string `json:"group_id,omitemtpy"`
+	Name               string `json:"name,omitempty"`
+	Status             string `json:"status,omitempty"`
 }
 
 type GroupsResult struct {
-	Stat     string
-	Response []GroupResponse
+	Stat     string          `json:"stat,omitempty"`
+	Response []GroupResponse `json:"response,omitempty"`
 }
 
 type GroupResult struct {
-	Stat     string
-	Response GroupResponse
+	Stat     string        `json:"stat,omitempty"`
+	Response GroupResponse `json:"response,omitempty"`
 }
 
 //RetrieveGroups
