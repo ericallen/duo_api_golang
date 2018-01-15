@@ -16,51 +16,59 @@ func SetUsername(username string) func(*url.Values) {
 }
 
 type Groups struct {
-	Desc string
-	Name string
+	Desc string `json:"desc,omitempty"`
+	Name string `json:"name,omitempyt"`
 }
 
 type Phone struct {
-	Phone_ID           string
-	Number             string
-	Extention          string
-	Name               string
-	Postdelay          string
-	Predelay           string
-	Type               string
-	Capabilities       []string
-	Platform           string
-	Activated          bool
-	SMS_Passcodes_Sent bool
+	Phone_ID           string   `json:"phone_id,omitempty"`
+	Number             string   `json:"number,omitempty"`
+	Extention          string   `json:"extenstion,omitempty"`
+	Name               string   `json:"name,omitempty"`
+	Postdelay          string   `json:"postdelay,omitempty"`
+	Predelay           string   `json:"predelay,omitempty"`
+	Type               string   `json:"type,omitempty"`
+	Capabilities       []string `json:"capabilities,omitempty"`
+	Platform           string   `json:"platform,omitempty"`
+	Activated          bool     `json:"activated,omitempty"`
+	SMS_Passcodes_Sent bool     `json:"sms_passcodes_sent,omitempty"`
 }
 
 type Token struct {
-	Serial   string
-	Token_ID string
-	Type     string
+	Serial   string `json:"serial,omitempty"`
+	Token_ID string `json:"token_id,omitempty"`
+	Type     string `json:"type,omitempty"`
 }
 
 type UserResponse struct {
-	User_ID    string
-	Username   string
-	Realname   string
-	Email      string
-	Status     string
-	Groups     []Groups
-	Last_Login int64
-	Notes      string
-	Phones     []Phone
-	Tokens     []Token
+	User_ID             string   `json:"user_id,omitempty"`
+	Username            string   `json:"username,omitempty"`
+	Alias1              string   `json:"alias1,omitempty"`
+	Alias2              string   `json:"alias2,omitempty"`
+	Alias3              string   `json:"alias3,omitempty"`
+	Alias4              string   `json:"alias4,omitempty"`
+	Created             int64    `json:"created,omitempty"`
+	Firstname           string   `json:"firstname,omitempty"`
+	Realname            string   `json:"realname,omitempty"`
+	Email               string   `json:"email,omitempty"`
+	Status              string   `json:"status,omitempty"`
+	Groups              []Groups `json:"groups,omitempty"`
+	Last_Directory_Sync int64    `json:"last_directory_sync,omitempty"`
+	Last_Login          int64    `json:"last_login,omitempty"`
+	Lastname            string   `json:"lastname,omitempty"`
+	Notes               string   `json:"notes,omitempty"`
+	Phones              []Phone  `json:"phones,omitempty"`
+	Tokens              []Token  `json:"tokens,omitempty"`
 }
 
 type UsersResult struct {
-	Stat     string
-	Response []UserResponse
+	Stat     string         `json:"stat,omitempty"`
+	Response []UserResponse `json:"response,omitempty"`
 }
 
 type UserResult struct {
-	Stat     string
-	Response UserResponse
+	Stat     string       `json:"stat,omitempty"`
+	Response UserResponse `json:"response,omitempty"`
 }
 
 // Users - Retreive Users
@@ -236,14 +244,14 @@ func (api *AdminApi) GetBypassCodesForUser(user_id string, options ...func(*url.
 }
 
 type UserGroupResponse struct {
-	Stat     string
-	Response []UserGroups
+	Stat     string       `json:"stat,omitempty"`
+	Response []UserGroups `json:"response,omitempty"`
 }
 
 type UserGroups struct {
-	Desc     string
-	Group_ID string
-	Name     string
+	Desc     string `json:"desc,omitempty"`
+	Group_ID string `json:"group_id,omitempty"`
+	Name     string `json:"name,omitempty"`
 }
 
 //Retreive Groups by User ID
@@ -294,8 +302,8 @@ func (api *AdminApi) DisassociateGroupfromUser(user_id, group_id string) (*StatR
 }
 
 type PhoneResult struct {
-	Stat     string
-	Response []Phone
+	Stat     string  `json:"stat,omitempty"`
+	Response []Phone `json:"response,omitempty"`
 }
 
 //Retreive Phones by User ID
@@ -327,8 +335,8 @@ func (api *AdminApi) DisassoicatePhonefromUser(user_id, phone_id string) (*StatR
 }
 
 type TokenResult struct {
-	Stat     string
-	Response []Token
+	Stat     string  `json:"stat,omitempty"`
+	Response []Token `json:"response,omitempty"`
 }
 
 //Retreive Hardware Token by UserID
