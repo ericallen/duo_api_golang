@@ -21,18 +21,26 @@ type IntegrationResult struct {
 }
 
 type Integration struct {
-	Enroll_Policy                 string
-	Greeting                      string
-	Groups_Allowed                []GroupResponse
-	Integration_Key               string
-	IP_Whitelist                  []string
-	IP_Whitelist_Enroll_Policy    string
-	Name                          string
-	Notes                         string
-	Secret_Key                    string
-	Type                          string
-	Trusted_Device_Days           int
-	Username_Normalization_Policy string
+	Enroll_Policy                 string          `json:"enroll_policy,omitempty"`
+	Greeting                      string          `json:"greeting,omitempty"`
+	Groups_Allowed                []GroupResponse `json:"groups_allowed,omitempty"`
+	Integration_Key               string          `json:"integration_key,omitempty"`
+	IP_Whitelist                  []string        `json:"ip_whitelist,omitempty"`
+	IP_Whitelist_Enroll_Policy    string          `json:"ip_whitelist_enroll_policy,omitempty"`
+	Name                          string          `json:"name,omitempty"`
+	Notes                         string          `json:"notes,omitempty"`
+	Secret_Key                    string          `json:"secret_key,omitempty"`
+	Type                          string          `json:"type,omitempty"`
+	Trusted_Device_Days           int64           `json:"trusted_device_days,omitempty"`
+	Username_Normalization_Policy string          `json:"username_normalization_policy,omitempty"`
+	AdminAPI_Admins               int64           `json:"adminapi_admins,omitempty"`
+	AdminAPI_Info                 int64           `json:"adminapi_info,omitempty"`
+	AdminAPI_Integrations         int64           `json:"adminapi_integrations,omitempty"`
+	AdminAPI_Read_Log             int64           `json:"adminapi_read_log,omitempty"`
+	AdminAPI_Read_Resource        int64           `json:"adminapi_read_resource,omitempty"`
+	AdminAPI_Settings             int64           `json:"adminapi_settings,omitempty"`
+	AdminAPI_Write_Resoure        int64           `json:"adminapi_write_resource,omitempty"`
+	Policy_Key                    string          `json:"policy_key,omitempty"`
 }
 
 //Retrieve Integrations
