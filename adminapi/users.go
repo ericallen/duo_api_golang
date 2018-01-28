@@ -416,3 +416,17 @@ func (api *AdminApi) DisassociateHardwareTokenfromUser(user_id, token_id string)
 	}
 	return ret, nil
 }
+
+//Retreive U2F Tokens by User ID
+func (api *AdminApi) RetreiveU2FTokensbyUserID(user_id string) (*U2FTokenResponse, error) {
+	path := fmt.Sprintf("/admin/v1/users/%s/u2ftokens", user_id)
+	_, body, err := api.SignedCall("GET", path, nil, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+	ret := &U2FTokenResponse{}
+	if err = json.Unmarshal(body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
