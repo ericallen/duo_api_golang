@@ -19,6 +19,8 @@ type Settings struct {
 	Caller_ID                     string
 	Fraud_Email                   string
 	Fraud_Email_Enabled           bool
+	Helpdesk_Bypass               string
+	HelpDesk_Bypass_Expiration    int64
 	Inactive_User_Expiration      int
 	Keypress_Confirm              string
 	Keypress_Fraud                string
@@ -34,6 +36,8 @@ type Settings struct {
 	Password_Required_Special     bool
 	Password_Requires_Upper_Alpha bool
 	Push_Enabled                  bool
+	Req_Fips_Passcodes_Android    bool
+	Security_Checkup_Enabled      int64
 	SMS_Batch                     int
 	SMS_Enabled                   bool
 	SMS_Expiration                int
