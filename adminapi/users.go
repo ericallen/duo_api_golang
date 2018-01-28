@@ -148,6 +148,42 @@ func SetNotes(notes string) func(*url.Values) {
 	}
 }
 
+func SetAlias1(alias1 string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("alias1", alias1)
+	}
+}
+
+func SetAlias2(alias2 string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("alias2", alias2)
+	}
+}
+
+func SetAlias3(alias3 string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("alias3", alias3)
+	}
+}
+
+func SetAlias4(alias4 string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("alias4", alias4)
+	}
+}
+
+func SetFirstname(firstname string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("firstname", firstname)
+	}
+}
+
+func SetLastName(lastname string) func(*url.Values) {
+	return func(opts *url.Values) {
+		opts.Set("lastname", lastname)
+	}
+}
+
 //ModifyUser -
 func (api *AdminApi) ModifyUser(user_id string, options ...func(*url.Values)) (*UserResult, error) {
 	opts := url.Values{}
